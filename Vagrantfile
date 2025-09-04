@@ -36,9 +36,9 @@ Vagrant.configure("2") do |config|
   # Define roles and ranges
   roles = {
     "postgres" => (1..3),
-    "maas"     => (1..2),
+    "maas"     => (1..3),
+    "compute"  => (1..3),
   }
-#  "compute"  => (1..2),
 
   roles.each do |role, range|
     range.each do |i|
@@ -87,14 +87,14 @@ Vagrant.configure("2") do |config|
         # Libvirt provider settings
         node.vm.provider :libvirt do |lv|
           lv.cpus   = 2
-          lv.memory = 1536
+          lv.memory = 2048
           # Enable nested virtualization if supported
           lv.nested = true if lv.respond_to?(:nested)
 
         end
         node.vm.provider "virtualbox" do |v|
           v.cpus   = 2
-          v.memory = 1536
+          v.memory = 2048
         end
       end
 
